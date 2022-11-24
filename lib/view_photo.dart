@@ -56,25 +56,33 @@ class _ViewPhotosState extends State<ViewPhotos> {
       body: Container(
           child: Stack(
         children: [
-          PhotoViewGallery.builder(
-            scrollPhysics: const BouncingScrollPhysics(),
-            pageController: pageController,
-            builder: (BuildContext context, int index) {
-              return PhotoViewGalleryPageOptions(
-                imageProvider: NetworkImage(widget.imageList[index]),
-                heroAttributes:
-                    PhotoViewHeroAttributes(tag: "photo${widget.imageIndex}"),
-              );
-            },
-            onPageChanged: onPageChanged,
-            itemCount: widget.imageList.length,
-            loadingBuilder: (context, progress) => Center(
-              child: Container(
-                width: 60.0,
-                height: 60.0,
-                child: (progress == null || progress.cumulativeBytesLoaded == null || progress.expectedTotalBytes == null)?CircularProgressIndicator():CircularProgressIndicator(
-                  value: progress.cumulativeBytesLoaded /
-                      progress.expectedTotalBytes!,
+          SizedBox(
+            width: MediaQuery.of(context).size.width,
+            height: MediaQuery.of(context).size.height,
+            child: PhotoViewGallery.builder(
+              scrollPhysics: const BouncingScrollPhysics(),
+              pageController: pageController,
+              builder: (BuildContext context, int index) {
+                return PhotoViewGalleryPageOptions(
+                  imageProvider: NetworkImage(widget.imageList[index]),
+                  heroAttributes:
+                      PhotoViewHeroAttributes(tag: "photo${widget.imageIndex}"),
+                );
+              },
+              onPageChanged: onPageChanged,
+              itemCount: widget.imageList.length,
+              loadingBuilder: (context, progress) => Center(
+                child: Container(
+                  width: 60.0,
+                  height: 60.0,
+                  child: (progress == null ||
+                          progress.cumulativeBytesLoaded == null ||
+                          progress.expectedTotalBytes == null)
+                      ? CircularProgressIndicator()
+                      : CircularProgressIndicator(
+                          value: progress.cumulativeBytesLoaded /
+                              progress.expectedTotalBytes!,
+                        ),
                 ),
               ),
             ),
