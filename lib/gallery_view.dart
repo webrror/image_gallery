@@ -24,6 +24,7 @@ class GalleryView extends StatelessWidget {
     return GridView.builder(
       shrinkWrap: true,
       itemCount: imageUrlList.length,
+      padding: EdgeInsets.zero,
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: crossAxisCount,
           crossAxisSpacing: 6.0,
