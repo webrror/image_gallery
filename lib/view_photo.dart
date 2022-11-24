@@ -45,7 +45,7 @@ class _ViewPhotosState extends State<ViewPhotos> {
               color: Colors.white,
             ),
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.of(context,rootNavigator: true).pop();
             },
           )
         ],
