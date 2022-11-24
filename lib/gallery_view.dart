@@ -21,47 +21,41 @@ class GalleryView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
-    return Scaffold(
-      backgroundColor: Colors.grey.shade300,
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: GridView.builder(
-            shrinkWrap: true,
-            itemCount: imageUrlList.length,
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                crossAxisCount: crossAxisCount,
-                crossAxisSpacing: 6.0,
-                mainAxisSpacing: 6.0),
-            itemBuilder: (BuildContext context, int index) {
-              return InkWell(
-                onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (_) {
-                            return ViewPhotos(
-                              imageIndex: index,
-                              imageList: imageUrlList,
-                              heroTitle: "image$index",
-                            );
-                          },
-                          fullscreenDialog: true));
-                },
-                child: Container(
-                  child: Hero(
-                      tag: "photo$index",
-                      child: CachedNetworkImage(
-                        fit: BoxFit.fill,
-                        imageUrl: imageUrlList[index],
-                        placeholder: (context, url) => Container(
-                            child: Center(child: CupertinoActivityIndicator())),
-                        errorWidget: (context, url, error) => Icon(Icons.error),
-                      )),
-                ),
-              );
-            }),
-      ),
+    return GridView.builder(
+      shrinkWrap: true,
+      itemCount: imageUrlList.length,
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: crossAxisCount,
+          crossAxisSpacing: 6.0,
+          mainAxisSpacing: 6.0),
+      itemBuilder: (BuildContext context, int index) {
+        return InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (_) {
+                      return ViewPhotos(
+                        imageIndex: index,
+                        imageList: imageUrlList,
+                        heroTitle: "image$index",
+                      );
+                    },
+                    fullscreenDialog: true));
+          },
+          child: Container(
+            child: Hero(
+                tag: "photo$index",
+                child: CachedNetworkImage(
+                  fit: BoxFit.fill,
+                  imageUrl: imageUrlList[index],
+                  placeholder: (context, url) => Container(
+                      child: Center(child: CupertinoActivityIndicator())),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                )),
+          ),
+        );
+      },
     );
   }
 }
